@@ -9,6 +9,7 @@
 /storage/*.key
 /vendor
 /.vscode
+/infra/mysql/mysql-data
 *.sublime-project
 *.sublime-workspace
 _ide_helper.php

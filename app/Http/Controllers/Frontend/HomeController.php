@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers\Frontend;
 
+use App\Models\Article;
+
 /**
  * Class HomeController.
  */
@@ -12,6 +14,13 @@ class HomeController
      */
     public function index()
     {
-        return view('frontend.index');
+        $articles = Article::all();
+        return view('frontend.blog', compact('articles'));
+    }
+
+    public function single($article)
+    {
+        $articles = Article::where('id', $article)->first();
+        return view('frontend.view', compact('articles'));
     }
 }

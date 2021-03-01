@@ -11,6 +11,7 @@ use App\Domains\Auth\Http\Controllers\Frontend\Auth\SocialController;
 use App\Domains\Auth\Http\Controllers\Frontend\Auth\TwoFactorAuthenticationController;
 use App\Domains\Auth\Http\Controllers\Frontend\Auth\UpdatePasswordController;
 use App\Domains\Auth\Http\Controllers\Frontend\Auth\VerificationController;
+use App\Http\Controllers\Backend\CommentController;
 use Tabuna\Breadcrumbs\Trail;
 
 /*
@@ -19,6 +20,10 @@ use Tabuna\Breadcrumbs\Trail;
  */
 Route::group(['as' => 'auth.'], function () {
     Route::group(['middleware' => 'auth'], function () {
+        //Comment
+        Route::post('store', [CommentController::class, 'store'])->name('store-comment');
+
+
         // Authentication
         Route::post('logout', [LoginController::class, 'logout'])->name('logout');
 

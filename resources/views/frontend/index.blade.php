@@ -4,8 +4,6 @@
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <title>{{ appName() }}</title>
-        <meta name="description" content="@yield('meta_description', appName())">
-        <meta name="author" content="@yield('meta_author', 'Anthony Rappa')">
         @yield('meta')
 
         @stack('before-styles')
@@ -66,46 +64,40 @@
         </style>
         @stack('after-styles')
     </head>
-    <body>
-        @include('includes.partials.read-only')
-        @include('includes.partials.logged-in-as')
-        @include('includes.partials.announcements')
+    <header>
 
-        <div id="app" class="flex-center position-ref full-height">
-            <div class="top-right links">
-                @auth
-                    @if ($logged_in_user->isUser())
-                        <a href="{{ route('frontend.user.dashboard') }}">@lang('Dashboard')</a>
-                    @endif
+        <div class="navbar navbar-dark bg-dark box-shadow">
+            <div class="container d-flex justify-content-between">
+                <a href="#" class="navbar-brand d-flex align-items-center"><strong>Blog</strong>
+                </a>
+                <button class="navbar-toggler" type="button">
+                    @auth
+                        @if ($logged_in_user->isUser())
+                            <a href="{{ route('frontend.user.dashboard') }}">@lang('Dashboard')</a>
+                        @endif
 
-                    <a href="{{ route('frontend.user.account') }}">@lang('Account')</a>
-                @else
-                    <a href="{{ route('frontend.auth.login') }}">@lang('Login')</a>
+                        <a href="{{ route('frontend.user.account') }}">@lang('Account')</a>
+                    @else
+                        <a href="{{ route('frontend.auth.login') }}">@lang('Login')</a> &nbsp; &nbsp;
 
-                    @if (config('boilerplate.access.user.registration'))
-                        <a href="{{ route('frontend.auth.register') }}">@lang('Register')</a>
-                    @endif
-                @endauth
-            </div><!--top-right-->
+                        @if (config('boilerplate.access.user.registration'))
+                            <a href="{{ route('frontend.auth.register') }}">@lang('Register')</a>
+                        @endif
+                    @endauth
+                </button>
+            </div>
+        </div>
+    </header>
+    <main role="main">
 
-            <div class="content">
-                @include('includes.partials.messages')
+        <section class="jumbotron text-center">
+            <div class="container">
+                <h1 class="jumbotron-heading">Blog Exam</h1>
+                <p class="lead text-muted">Something short and leading about the collection below—its contents, the creator, etc. Make it short and sweet, but not too short so folks don't simply skip over it entirely.</p>
+            </div>
+        </section>
 
-                <div class="title m-b-md">
-                    <example-component></example-component>
-                </div><!--title-->
+        @yield('content')
 
-                <div class="links">
-                    <a href="http://laravel-boilerplate.com" target="_blank"><i class="fa fa-book"></i> @lang('Docs')</a>
-                    <a href="https://github.com/rappasoft/laravel-boilerplate" target="_blank"><i class="fab fa-github"></i> GitHub</a>
-                </div><!--links-->
-            </div><!--content-->
-        </div><!--app-->
-
-        @stack('before-scripts')
-        <script src="{{ mix('js/manifest.js') }}"></script>
-        <script src="{{ mix('js/vendor.js') }}"></script>
-        <script src="{{ mix('js/frontend.js') }}"></script>
-        @stack('after-scripts')
-    </body>
+    </main>
 </html>

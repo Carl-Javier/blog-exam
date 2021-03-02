@@ -112,4 +112,19 @@ class ArticlesService extends BaseService
         return $article;
     }
 
+
+    /**
+     * @param Article $article
+     * @return bool
+     * @throws GeneralException
+     */
+    public function destroy(Article $article): bool
+    {
+        if ($article->forceDelete()) {
+            return true;
+        }
+
+        throw new GeneralException(__('There was a problem deleting this article. Please try again.'));
+    }
+
 }

@@ -31,4 +31,5 @@ Route::group(['prefix' => 'articles', 'as' => 'articles.', 'middleware' => ['aut
 
     Route::patch('{article}/update', [BlogController::class, 'update'])->name('update');
     Route::get('{article}/detail', [BlogController::class, 'show'])->name('show');
+    Route::delete('{article}/delete', [BlogController::class, 'delete'])->name('delete');
 });

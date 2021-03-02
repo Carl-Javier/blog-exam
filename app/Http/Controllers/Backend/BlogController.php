@@ -89,4 +89,15 @@ class BlogController
     {
         return view('backend.articles.detail', ['article' => $article]);
     }
+
+    /**
+     * @param Article $article
+     * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View
+     * @throws \App\Exceptions\GeneralException
+     */
+    public function delete(Article $article)
+    {
+        $this->articlesService->destroy($article);
+        return redirect()->route('admin.articles.list')->withFlashSuccess(__('The Articles was successfully deleted.'));
+    }
 }
